@@ -10,19 +10,26 @@ import AddForm from '../AddForm';
 
 
 export default class App extends Component {
+  itemId = 0;
+
   state = {
     todoData: [
-      { id: 1, label: 'Learn React.js', important: false },
-      { id: 2, label: 'Create awesome app', important: true }
+      this.createTodoItem('Learn React.js'),
+      this.createTodoItem('Create awesome app')
     ]
   };
 
-  addItem = (message) => {
-    const item = {
-      label: message,
+  createTodoItem(label) {
+    return {
+      label,
       important: false,
-      id: Date.now()
+      done: false,
+      id: ++this.itemId
     };
+  };
+
+  addItem = (message) => {
+    const item = this.createTodoItem(message);
 
     this.setState(({ todoData }) => {
       return {
@@ -35,6 +42,28 @@ export default class App extends Component {
     this.setState(({ todoData }) => {
       return {
         todoData: todoData.filter((item) => item.id !== id)
+      };
+    });
+  };
+
+  onToggleImportant = (id) => {
+    this.setState(({ todoData }) => {
+      return {
+        todoData: todoData.map((item) => {
+          if (item.id === id) item.important = !item.important;
+          return item;
+        })
+      };
+    });
+  };
+
+  onToggleDone = (id) => {
+    this.setState(({ todoData }) => {
+      return {
+        todoData: todoData.map((item) => {
+          if (item.id === id) item.done = !item.done;
+          return item;
+        })
       };
     });
   };
@@ -52,6 +81,8 @@ export default class App extends Component {
         <TodoList
           todos={todoData}
           onDeleted={this.deleteItem}
+          onToggleImportant={this.onToggleImportant}
+          onToggleDone={this.onToggleDone}
         />
         <AddForm onItemAdded={this.addItem} />
       </div>
