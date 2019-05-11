@@ -1,0 +1,8 @@
+.app-header { align-items: flex-end; }
+
+.app-header-title { flex-grow: 1; }
+
+.app-header-subtitle {
+  font-size: 1.2rem;
+  color: gray;
+}
