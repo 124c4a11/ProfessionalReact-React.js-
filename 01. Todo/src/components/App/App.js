@@ -6,6 +6,7 @@ import AppHeader from '../AppHeader';
 import SearchPanel from '../SearchPanel';
 import ItemStatusFilter from '../ItemsStatusFilter';
 import TodoList from '../TodoList';
+import AddForm from '../AddForm';
 
 
 export default class App extends Component {
@@ -14,6 +15,20 @@ export default class App extends Component {
       { id: 1, label: 'Learn React.js', important: false },
       { id: 2, label: 'Create awesome app', important: true }
     ]
+  };
+
+  addItem = (message) => {
+    const item = {
+      label: message,
+      important: false,
+      id: Date.now()
+    };
+
+    this.setState(({ todoData }) => {
+      return {
+        todoData: [ ...todoData, item ]
+      };
+    });
   };
 
   deleteItem = (id) => {
@@ -38,6 +53,7 @@ export default class App extends Component {
           todos={todoData}
           onDeleted={this.deleteItem}
         />
+        <AddForm onItemAdded={this.addItem} />
       </div>
     );
   };
