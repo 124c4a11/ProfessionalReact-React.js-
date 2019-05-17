@@ -3,10 +3,18 @@ import React, { Component } from 'react';
 import SwapiService from '../../services/SwapiService';
 import Header from '../Header';
 import RandomPlanet from '../RandomPlanet';
-import ItemList from '../ItemList';
+
+import {
+  PersonList,
+  PlanetList,
+  StarshipList,
+  PersonDetails,
+  PlanetDetails,
+  StarshipDetails
+} from '../swComponents';
+
 
 import Row from '../Row';
-import ItemDetails, { Record } from '../ItemDetails';
 
 import './App.css';
 
@@ -19,45 +27,30 @@ export default class App extends Component {
   };
 
   render() {
-    const {
-      getPerson,
-      getAllPeople,
-      getStarship,
-      getPersonImage,
-      getStarshipImage
-    } = this.swapiService;
+    const personDetails = <PersonDetails itemId={ 11 } />;
 
-    const personDetails = (
-      <ItemDetails
-        itemId={ 11 }
-        getData={ getPerson }
-        getImageUrl={ getPersonImage }
-      >
-        <Record label="Gender" field="gender" />
-        <Record label="Eye Color" field="eyeColor" />
-      </ItemDetails>
-    );
+    const planetDetails = <PlanetDetails itemId={ 5 } />;
 
-    const starshipDetails = (
-      <ItemDetails
-        itemId={ 5 }
-        getData={ getStarship }
-        getImageUrl={ getStarshipImage }
-      >
-        <Record label="Model" field="model" />
-        <Record label="Length" field="length" />
-        <Record label="Cost" field="costInCredits" />
-      </ItemDetails>
-    );
+    const starshipDetails = <StarshipDetails itemId = { 15 } />
+
 
     const peopleList = (
-      <ItemList
-        getData={getAllPeople}
-        onItemSelected={() => {}}
-      >
+      <PersonList>
         { ({name}) => <span>{name}</span> }
-      </ItemList>
-    )
+      </PersonList>
+    );
+
+    const starshipList = (
+      <StarshipList>
+        { ({name}) => <span>{name}</span> }
+      </StarshipList>
+    );
+
+    const planetList = (
+      <PlanetList>
+        { ({name}) => <span>{name}</span> }
+      </PlanetList>
+    );
 
     return (
       <div className="container">
@@ -65,7 +58,9 @@ export default class App extends Component {
         <RandomPlanet />
         {/* <PeoplePage /> */}
 
-        <Row left={ peopleList } right={ starshipDetails } />
+        <Row left={ peopleList } right={ personDetails } />
+        <Row left={ planetList } right={ planetDetails } />
+        <Row left={ starshipList } right={ starshipDetails } />
       </div>
     );
   };
