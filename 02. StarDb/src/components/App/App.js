@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 
 import SwapiService from '../../services/SwapiService';
+import DummySwapiService from '../../services/DummySwapiService';
 import { SwapiServiceProvider } from '../swapiServiceContext';
 import Header from '../Header';
 import RandomPlanet from '../RandomPlanet';
+import Row from '../Row';
 
 import {
   PersonList,
@@ -14,17 +16,25 @@ import {
   StarshipDetails
 } from '../swComponents';
 
-
-import Row from '../Row';
-
 import './App.css';
 
 
 export default class App extends Component {
-  swapiService = new SwapiService();
-
   state = {
-    selectedPersonId: 1
+    selectedPersonId: 1,
+    swapiService: new SwapiService()
+  };
+
+  onServiceChange = () => {
+    this.setState(({ swapiService }) => {
+      const Service = swapiService instanceof SwapiService
+        ? DummySwapiService
+        : SwapiService;
+
+      return {
+        swapiService: new Service()
+      };
+    });
   };
 
   render() {
@@ -38,8 +48,8 @@ export default class App extends Component {
 
     return (
       <div className="container">
-        <SwapiServiceProvider value={ this.swapiService }>
-          <Header />
+        <SwapiServiceProvider value={ this.state.swapiService }>
+          <Header onServiceChange={ this.onServiceChange } />
           <RandomPlanet />
 
           <Row left={ peopleList } right={ personDetails } />
