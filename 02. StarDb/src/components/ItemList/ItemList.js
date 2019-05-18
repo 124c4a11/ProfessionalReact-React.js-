@@ -13,7 +13,7 @@ export default (props) => {
     return (
       <li
         key={ id }
-        onClick={ () => this.props.onItemSelected(id) }
+        onClick={ () => onItemSelected(id) }
         className="list-group-item"
       >{ label }</li>
     );

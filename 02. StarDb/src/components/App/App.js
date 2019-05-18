@@ -1,20 +1,14 @@
 import React, { Component } from 'react';
 
 import SwapiService from '../../services/SwapiService';
-import DummySwapiService from '../../services/DummySwapiService';
 import { SwapiServiceProvider } from '../swapiServiceContext';
+import DummySwapiService from '../../services/DummySwapiService';
+
+import { PeoplePage, PlanetsPage, StarshipsPage } from '../pages'
+
 import Header from '../Header';
 import RandomPlanet from '../RandomPlanet';
-import Row from '../Row';
-
-import {
-  PersonList,
-  PlanetList,
-  StarshipList,
-  PersonDetails,
-  PlanetDetails,
-  StarshipDetails
-} from '../swComponents';
+import ErrorBoundry from '../ErrorBoundry';
 
 import './App.css';
 
@@ -38,24 +32,18 @@ export default class App extends Component {
   };
 
   render() {
-    const personDetails = <PersonDetails itemId={ 11 } />;
-    const planetDetails = <PlanetDetails itemId={ 5 } />;
-    const starshipDetails = <StarshipDetails itemId = { 15 } />
-
-    const peopleList = <PersonList />;
-    const starshipList = <StarshipList />;
-    const planetList = <PlanetList />;
-
     return (
       <div className="container">
-        <SwapiServiceProvider value={ this.state.swapiService }>
-          <Header onServiceChange={ this.onServiceChange } />
-          <RandomPlanet />
+        <ErrorBoundry>
+          <SwapiServiceProvider value={ this.state.swapiService }>
+            <Header onServiceChange={ this.onServiceChange } />
+            <RandomPlanet />
 
-          <Row left={ peopleList } right={ personDetails } />
-          <Row left={ planetList } right={ planetDetails } />
-          <Row left={ starshipList } right={ starshipDetails } />
-        </SwapiServiceProvider>
+            <PeoplePage />
+            <PlanetsPage />
+            <StarshipsPage />
+          </SwapiServiceProvider>
+        </ErrorBoundry>
       </div>
     );
   };
