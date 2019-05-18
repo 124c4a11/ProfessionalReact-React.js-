@@ -28,29 +28,12 @@ export default class App extends Component {
 
   render() {
     const personDetails = <PersonDetails itemId={ 11 } />;
-
     const planetDetails = <PlanetDetails itemId={ 5 } />;
-
     const starshipDetails = <StarshipDetails itemId = { 15 } />
 
-
-    const peopleList = (
-      <PersonList>
-        { ({name}) => <span>{name}</span> }
-      </PersonList>
-    );
-
-    const starshipList = (
-      <StarshipList>
-        { ({name}) => <span>{name}</span> }
-      </StarshipList>
-    );
-
-    const planetList = (
-      <PlanetList>
-        { ({name}) => <span>{name}</span> }
-      </PlanetList>
-    );
+    const peopleList = <PersonList />;
+    const starshipList = <StarshipList />;
+    const planetList = <PlanetList />;
 
     return (
       <div className="container">
