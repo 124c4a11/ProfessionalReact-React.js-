@@ -3,14 +3,14 @@ import React, { Component } from 'react';
 import Spinner from '../Spinner';
 
 
-export default (View, getData) => {
+export default (View) => {
   return class extends Component {
     state = {
       data: null
     };
 
     componentDidMount() {
-      getData()
+      this.props.getData()
         .then((data) => {
           this.setState({ data })
         });
