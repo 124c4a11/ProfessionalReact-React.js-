@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import SwapiService from '../../services/SwapiService';
+import { SwapiServiceProvider } from '../swapiServiceContext';
 import Header from '../Header';
 import RandomPlanet from '../RandomPlanet';
 
@@ -37,13 +38,14 @@ export default class App extends Component {
 
     return (
       <div className="container">
-        <Header />
-        <RandomPlanet />
-        {/* <PeoplePage /> */}
+        <SwapiServiceProvider value={ this.swapiService }>
+          <Header />
+          <RandomPlanet />
 
-        <Row left={ peopleList } right={ personDetails } />
-        <Row left={ planetList } right={ planetDetails } />
-        <Row left={ starshipList } right={ starshipDetails } />
+          <Row left={ peopleList } right={ personDetails } />
+          <Row left={ planetList } right={ planetDetails } />
+          <Row left={ starshipList } right={ starshipDetails } />
+        </SwapiServiceProvider>
       </div>
     );
   };
