@@ -13,8 +13,8 @@ const App = () => {
       <ShopHeader numberItems={ 5 } total={ 210 } />
       <main className="container" role="main">
         <Switch>
-          <Route to="/" exact component={ HomePage } />
-          <Route to="/cart" component={ CartPage } />
+          <Route path="/" exact component={ HomePage } />
+          <Route path="/cart" component={ CartPage } />
         </Switch>
       </main>
     </Fragment>

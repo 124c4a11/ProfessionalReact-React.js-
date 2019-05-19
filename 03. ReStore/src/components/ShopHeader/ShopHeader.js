@@ -8,7 +8,7 @@ export default ({ numberItems, total }) => {
       <div className="container">
         <div className="row align-items-center justify-content-between">
           <Link to="/" className="navbar-brand text-dark ml-3">ReStore</Link>
-          <Link to="/" className="text-dark mr-3">
+          <Link to="/cart" className="text-dark mr-3">
             <span className="fa fa-shopping-cart mr-2 text-info"></span>
             { numberItems } items (${ total })
           </Link>
