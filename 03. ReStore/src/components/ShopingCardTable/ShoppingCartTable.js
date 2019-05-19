@@ -8,11 +8,13 @@ export default () => {
       <h2>Your Order</h2>
       <table className="table">
         <thead>
-          <th>#</th>
-          <th>Item</th>
-          <th>Count</th>
-          <th>Price</th>
-          <th className="text-right">Action</th>
+          <tr>
+            <th>#</th>
+            <th>Item</th>
+            <th>Count</th>
+            <th>Price</th>
+            <th className="text-right">Action</th>
+          </tr>
         </thead>
 
         <tbody>

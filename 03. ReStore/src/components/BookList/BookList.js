@@ -6,18 +6,21 @@ import { booksLoaded } from '../../actions';
 
 import { withBookstoreService } from '../HOC';
 import BookListItem from '../BookListItem';
+import Spinner from '../Spinner';
 
 
 class BookList extends Component {
   componentDidMount() {
-    const { bookstoreService } = this.props;
-    const data = bookstoreService.getBooks();
+    const { bookstoreService, booksLoaded } = this.props;
 
-    this.props.booksLoaded(data);
+    bookstoreService.getBooks()
+      .then((data) => booksLoaded(data));
   };
 
   render() {
-    const { books } = this.props;
+    const { books, loading } = this.props;
+
+    if (loading) return <Spinner />;
 
     return (
       <ul className="book-list list-unstyled">
@@ -32,7 +35,10 @@ class BookList extends Component {
 };
 
 
-const mapStateToProps = ({ books }) => ({ books });
+const mapStateToProps = ({ books, loading }) => ({
+  books,
+  loading
+});
 
 
 export default compose(
