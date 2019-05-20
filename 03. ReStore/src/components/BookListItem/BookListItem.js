@@ -3,7 +3,7 @@ import React from 'react';
 import './BookListItem.css';
 
 
-export default ({ book }) => {
+export default ({ book, onAddedToCart }) => {
   const { title, author, price, imgUrl } = book;
 
   return (
@@ -15,7 +15,10 @@ export default ({ book }) => {
         <h3 className="book-title">{ title }</h3>
         <div className="book-author">{ author }</div>
         <div className="book-price">${ price }</div>
-        <button className="btn btn-info add-to-cart mt-2">Add to cart</button>
+        <button
+          onClick={ onAddedToCart }
+          className="btn btn-info add-to-cart mt-2"
+        >Add to cart</button>
       </div>
     </div>
   );
